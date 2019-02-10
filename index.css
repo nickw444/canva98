@@ -1,0 +1,167 @@
+body {
+  background-color: #137172;
+  font-family: 'Microsoft Sans Serif';
+  font-smooth: never;
+  -webkit-font-smoothing : none;
+  margin: 0;
+}
+
+button {
+  background: #C0C0C0;
+  border: none;
+  outline: none;
+  font: inherit;
+}
+
+.bevel,button {
+  border: 2px solid #545454;
+  border-top-color: #EBEBEB;
+  border-left-color: #EBEBEB;
+}
+
+.emboss,button:active{
+  border: 2px solid #DBDBDB;
+  border-top-color: #949494;
+  border-left-color: #949494;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.taskbar {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: #C0C0C0;
+  border-top: 1px solid #E7E7E7;
+  border-bottom: 1px solid #6F6F6F;
+  padding: 2px;
+  display: flex;
+}
+
+.taskbar__tray {
+  padding: 2px 4px;
+}
+
+.taskbar__tray > img {
+  height: 14px;
+  margin-right: 4px;
+}
+
+.taskbar__start {
+  padding: 2px 4px;
+  font-weight: bold;
+}
+
+.taskbar__apps {
+  flex-grow: 1;
+  padding: 0 6px;
+}
+.taskbar__apps>button {
+  display: inline-block;
+  padding: 2px 4px;
+}
+.taskbar__apps>button>img {
+  height: 14px;
+}
+
+.canvas {
+  height: 100%;
+}
+
+.window {
+  background: #C0C0C0;
+  padding: 1px;
+  border-top: 1px solid #F1F1F1;
+  position:absolute;
+  min-width: 200px;
+}
+
+.window.inactive header {
+  background: #808080;
+}
+
+.window header {
+  background: linear-gradient(90deg, #02017B, #1982CD);
+  width: 100%;
+  color: white;
+  padding: 2px 4px;
+  box-sizing: border-box;
+  font-weight: bold;
+  display: flex;
+}
+
+.window header>div {
+  flex-grow: 1;
+}
+
+.window header>button {
+  padding: 0 2px;
+  line-height: 0.9;
+}
+
+.window textarea {
+  font-size: 24px;
+}
+
+.start {
+  z-index: 454355;
+  background: #C0C0C0;
+  padding: 2px;
+  width: 200px;
+  position: absolute;
+  bottom: 30px;
+  left: 0px;
+  display: flex;
+}
+
+.start__brand {
+  background: linear-gradient(0deg, #1982CD, #02017B);
+  color: white;
+  width: 26px;
+}
+
+.taskbar__start img {
+  height: 14px;
+}
+
+.start__brandText {
+  transform: rotate(270deg);
+  color: white;
+  position:  absolute;
+  bottom: 38px;
+  left: -26px;
+  font-size: 20px;
+}
+
+.start__menuList {
+  width: 100%;
+}
+
+.start__menuList div,
+.start__menuList a {
+  padding: 10px 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.start__menuList a:visited {
+  color: inherit;
+}
+
+.start__menuList div:hover,
+.start__menuList a:hover{
+  background: #02007B;
+  color: white;
+}
+.start__menuList div>img,
+.start__menuList a>img {
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+}
