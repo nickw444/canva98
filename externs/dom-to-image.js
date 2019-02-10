@@ -1,0 +1,2 @@
+var domtoimage;
+domtoimage.toPng;

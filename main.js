@@ -1,4 +1,3 @@
-const toPng = domtoimage['toPng'];
 const $ = document.querySelector.bind(document);
 const clockEl = $('.taskbar__clock');
 const startEl = $('.start');
@@ -15,7 +14,7 @@ function main() {
 
 class AppWindow {
   constructor(title, content, icon) {
-    this.taskbarEl = document.createElement('button');
+    this.taskbarEl = createElement('button', undefined, {});
     this.taskbarEl.innerHTML = `<img src="${icon}" /> ${title}`;
 
     this.el = document.createElement('div');
@@ -44,7 +43,7 @@ class AppWindow {
 
     this.el.addEventListener('mousedown', () => this.activate());
     window.addEventListener('mousedown', (e) => {
-      if (!this.el.contains(e.target)) {
+      if (!this.el.contains(/** @type{HTMLElement} */(e.target))) {
         this.deactivate();
       }
     });
@@ -73,7 +72,7 @@ class AppWindow {
 
 function initClock() {
   const updateClock = () => {
-    clockEl.innerText = new Date().toLocaleTimeString('en-AU', {hour12: true});
+    clockEl.innerText = new Date().toLocaleTimeString('en', {hour12: true});
   };
   window.setInterval(updateClock, 1000);
   updateClock();
@@ -88,14 +87,14 @@ function initStart() {
   addClickListener($('.notepad'), onNotepadClick);
 
   // Close the start menu on click outside
-  addClickListener(window, (e) => {
+  addClickListener(window, e => {
     if (!startEl.contains(e.target) && !startButtonEl.contains(e.target)) {
       toggleStart(false);
     }
   });
 }
 
-function onStartClick(e) {
+function onStartClick() {
   toggleStart();
 }
 
@@ -123,6 +122,9 @@ function onShutdownClick() {
   canvasEl.innerHTML = '';
 }
 
+/**
+ * @param {?boolean=} visibility
+ */
 function toggleStart(visibility) {
   if (visibility != null ? visibility : startEl.classList.contains('hidden')) {
     startEl.classList.remove('hidden');
@@ -137,7 +139,7 @@ function runExport() {
   toggleStart(false);
   // Enqueue the export task so the UI can update to hide the start menu.
   window.requestAnimationFrame(() => {
-    toPng(document.body).then((blob) => {
+    domtoimage.toPng(document.body).then((blob) => {
       const downloadLink = createElement('a', undefined, {
         href: blob, download: 'export.png'
       }, document.body);
@@ -147,9 +149,15 @@ function runExport() {
   });
 }
 
+/**
+ * @return {!Promise<string>}
+ */
 function requestFile() {
   return new Promise(resolve => {
-    const fileEl = createElement('input', undefined, {type: 'file'}, document.body);
+    const fileEl = createElement('input', undefined, {
+      type: 'file',
+      accept: 'image/*',
+    }, document.body);
     fileEl.addEventListener('change', (e) => {
       resolve(URL.createObjectURL(e.target.files[0]));
     });
@@ -158,6 +166,14 @@ function requestFile() {
   })
 }
 
+/**
+ *
+ * @param {string} tag
+ * @param {?Array<string>|undefined} classes
+ * @param {!Object} attrs
+ * @param {?Element=} dest
+ * @return {!Element}
+ */
 function createElement(tag, classes, attrs, dest) {
   const el = document.createElement(tag);
   classes && el.classList.add(...classes);
@@ -166,6 +182,10 @@ function createElement(tag, classes, attrs, dest) {
   return el;
 }
 
+/**
+ * @param {?EventTarget|undefined} el
+ * @param {!function(Event)} handler
+ */
 function addClickListener(el, handler){
   el.addEventListener('click', handler);
 }

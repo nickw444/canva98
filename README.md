@@ -12,3 +12,10 @@ Supports the minimal feature set for the 19日:
 ## Demo
 
 ![doc/demo.png](doc/demo.png)
+
+
+## Compiling 
+
+```bash
+./bin/build.sh
+```
