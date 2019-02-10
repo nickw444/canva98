@@ -1,9 +1,9 @@
 const $ = document.querySelector.bind(document);
-const clockEl = $('.taskbar__clock');
-const startEl = $('.start');
-const canvasEl = $('.canvas');
-const taskbarEl = $('.taskbar__apps');
-const startButtonEl = $('.taskbar__start');
+const clockEl = $('.t');
+const startEl = $('.n');
+const canvasEl = $('.h');
+const taskbarEl = $('.g');
+const startButtonEl = $('.f');
 
 let zIndex = 1;
 let ghost = false;
@@ -24,7 +24,7 @@ class AppWindow {
     this.taskbarEl.innerHTML = `<img src="${icon}" /> ${title}`;
 
     this.el = document.createElement('div');
-    this.el.classList.add('window');
+    this.el.classList.add('i');
     this.el.innerHTML = `<header><div>${title}</div><button>x</button></header>`;
     content && this.el.appendChild(content);
 
@@ -68,15 +68,15 @@ class AppWindow {
   }
 
   deactivate() {
-    this.el.classList.add('inactive');
-    this.taskbarEl.classList.remove('emboss');
+    this.el.classList.add('j');
+    this.taskbarEl.classList.remove('b');
   }
 
   activate() {
     // Push this element to top of stack when active
     this.el.style.zIndex = zIndex++;
-    this.el.classList.remove('inactive');
-    this.taskbarEl.classList.add('emboss');
+    this.el.classList.remove('j');
+    this.taskbarEl.classList.add('b');
   }
 }
 
@@ -90,11 +90,11 @@ function initClock() {
 
 function initStart() {
   addClickListener(startButtonEl, onStartClick);
-  addClickListener($('.publish'), runExport);
-  addClickListener($('.shutdown'), onShutdownClick);
-  addClickListener($('.logoff'), onShutdownClick);
-  addClickListener($('.irfanview'), onIrfanviewClick);
-  addClickListener($('.notepad'), onNotepadClick);
+  addClickListener($('.o'), runExport);
+  addClickListener($('.s'), onShutdownClick);
+  addClickListener($('.r'), onShutdownClick);
+  addClickListener($('.q'), onIrfanviewClick);
+  addClickListener($('.p'), onNotepadClick);
 
   // Close the start menu on click outside
   addClickListener(window, e => {
@@ -110,7 +110,7 @@ function onStartClick() {
 
 function onNotepadClick() {
   toggleStart(false);
-  const w = new AppWindow('Notepad', document.createElement('textarea'), 'img/notepad.png');
+  const w = new AppWindow('Notepad', document.createElement('textarea'), 'i/e.png');
   canvasEl.appendChild(w.el);
   taskbarEl.appendChild(w.taskbarEl);
 }
@@ -120,7 +120,7 @@ function onIrfanviewClick() {
   requestFile()
       .then(src => {
         const img = createElement('img', undefined, {src});
-        const w = new AppWindow('IrfanView', img, 'img/irfanview.png');
+        const w = new AppWindow('IrfanView', img, 'i/b.png');
         canvasEl.appendChild(w.el);
         taskbarEl.appendChild(w.taskbarEl);
       });
@@ -136,12 +136,12 @@ function onShutdownClick() {
  * @param {?boolean=} visibility
  */
 function toggleStart(visibility) {
-  if (visibility != null ? visibility : startEl.classList.contains('hidden')) {
-    startEl.classList.remove('hidden');
-    startButtonEl.classList.add('emboss');
+  if (visibility != null ? visibility : startEl.classList.contains('c')) {
+    startEl.classList.remove('c');
+    startButtonEl.classList.add('b');
   } else {
-    startEl.classList.add('hidden');
-    startButtonEl.classList.remove('emboss');
+    startEl.classList.add('c');
+    startButtonEl.classList.remove('b');
   }
 }
 
