@@ -6,10 +6,16 @@ const taskbarEl = $('.taskbar__apps');
 const startButtonEl = $('.taskbar__start');
 
 let zIndex = 1;
+let ghost = false;
 
 function main() {
   initClock();
   initStart();
+  window.addEventListener('keydown', ({key}) => {
+    if (key === 'g') {
+      ghost = !ghost;
+    }
+  })
 }
 
 class AppWindow {
@@ -28,6 +34,10 @@ class AppWindow {
     const headerEl = this.el.querySelector('header');
     let offsetX, offsetY;
     const onMouseMove = (e) => {
+      if (ghost) {
+        const bg = this.el.cloneNode(true);
+        canvasEl.insertBefore(bg, this.el);
+      }
       this.el.style.transform = `translate(${e.clientX - offsetX}px,${e.clientY - offsetY}px)`;
     };
     headerEl.addEventListener('mousedown', (e) => {
