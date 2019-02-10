@@ -14,7 +14,14 @@ Supports the minimal feature set for the 19日:
 ![doc/demo.png](doc/demo.png)
 
 
-## Compiling 
+### Ghosting
+
+Press the `g` key on your keyboard to toggle the ghosting feature for all windows.
+
+![doc/demo_ghosting.png](doc/demo_ghosting.png)
+
+
+## Compiling
 
 ```bash
 ./bin/build.sh
